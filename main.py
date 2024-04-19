@@ -28,6 +28,7 @@ class OCRTagger(AddOn):
                 "None": "None",
             }
             document.data["ocr_engine"] = ocr_mapping.get(ocr_value)
+            document.save()
 
 
 if __name__ == "__main__":
