@@ -21,16 +21,16 @@ class OCRTagger(AddOn):
                 ocr_value = "None"
             ocr_mapping = {
                 "tess4": "tesseract",
+                "tess4_force": "tesseract",
+                "textract": "textract",
                 "textract_force": "textract",
                 "azuredi": "azure",
                 "googlecv": "google",
                 "doctr": "doctr",
                 "None": "None",
             }
-            print(ocr_value)
-            print(ocr_mapping.get(ocr_value))
             document.data["ocr_engine"] = ocr_mapping.get(ocr_value)
-            document.save()
+            document.put()
 
 
 if __name__ == "__main__":
