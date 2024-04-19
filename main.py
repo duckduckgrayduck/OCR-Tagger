@@ -27,6 +27,8 @@ class OCRTagger(AddOn):
                 "doctr": "doctr",
                 "None": "None",
             }
+            print(ocr_value)
+            print(ocr_mapping.get(ocr_value))
             document.data["ocr_engine"] = ocr_mapping.get(ocr_value)
             document.save()
 
