@@ -1,2 +1,3 @@
-python-documentcloud==3.7.1
+python-documentcloud==4.8.1
+python-squarelet==0.4.0
 requests
