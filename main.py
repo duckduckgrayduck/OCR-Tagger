@@ -56,9 +56,9 @@ class OCRTagger(SoftTimeOutAddOn):
         try:
             json_text = document.json_text
             return json_text["pages"][0]["ocr"]
-        except (KeyError, IndexError) as exc:
-            print(f"UNEXPECTED JSON SHAPE for {document.id}: {exc}")
-            return None
+        except (KeyError, IndexError):
+            print(f"No OCR value for {document.id}; tagging as None.")
+            return "None"
         except APIError as exc:
             print(f"FETCH FAILED for {document.id}: {exc}")
             return None
@@ -77,9 +77,9 @@ class OCRTagger(SoftTimeOutAddOn):
                 if ocr_value_to_tag is None:
                     print(f"Skipping {document.id}: unmapped OCR value {ocr_value!r}.")
                     continue
-                payload.append(
-                    {"id": document.id, "data": {"ocr_engine": ocr_value_to_tag}}
-                )
+                data = dict(document.data or {})
+                data["ocr_engine"] = [ocr_value_to_tag]
+                payload.append({"id": document.id, "data": data})
             if payload:
                 self.tag_documents(payload)
 
